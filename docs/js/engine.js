@@ -58,3 +58,29 @@ export const GLYPH = {
   contained: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3" width="3" height="10" rx="1" fill="currentColor"/><rect x="9.5" y="3" width="3" height="10" rx="1" fill="currentColor"/></svg>',
 };
 export const LABEL = { learning: "Learning", normal: "Normal", flagged: "Flagged", contained: "Contained" };
+
+// Cephalo's real rule matching, as in the published 0.1.1 engine: first matching rule wins; command rules test the shell command,
+// path rules test the file path of file-tool calls (on: any|read|write). Patterns are the published built-in rules (data/cephalo-rules-0.1.1.json).
+// Simplification: the real engine also tests a platform-normalised variant of the text. Not needed for these examples.
+export function evalCephalo(rules, call) {
+  for (const r of rules) {
+    let re; try { re = new RegExp(r.pattern, "i"); } catch { continue; }
+    if (r.type === "command" && call.command !== undefined && re.test(call.command)) return r;
+    if (r.type === "path" && call.path !== undefined) {
+      const on = r.on ?? "any", access = call.access ?? "read";
+      if ((on === "any" || on === access) && re.test(call.path)) return r;
+    }
+  }
+  return null;
+}
+
+// One event row, used by every product-labelled feed. The product is always named in text ("Cephalo: BLOCK"); symbols and colour are extra.
+const SYM = { BLOCK: "\u2715", ALLOW: "\u2713", FLAGGED: "\u25B2", CONTAINED: "\u275A\u275A", WATCHING: "\u25CB", RAN: "\u25B6", OFF: "\u2013" };
+export function evRow(product, verdict, text, kind) {
+  const li = el("li", { "data-product": product.toLowerCase(), "data-kind": kind });
+  const who = el("span", { class: "who" });
+  if (SYM[verdict]) who.append(el("span", { "aria-hidden": "true", class: "sym", text: SYM[verdict] + " " }));
+  who.append(document.createTextNode(`${product}: ${verdict}`));
+  li.append(who, el("span", { class: "what", text }));
+  return li;
+}

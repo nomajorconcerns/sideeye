@@ -30,6 +30,7 @@
 <script type="module" src="js/baseline.js"></script>
 <script type="module" src="js/replays.js"></script>
 <script type="module" src="js/eye.js"></script>
+<script type="module" src="js/split.js"></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="octo" viewBox="0 0 16 12" shape-rendering="crispEdges"><rect x="6" y="0" width="4" height="1" fill="#f472b6"/><rect x="3" y="1" width="10" height="1" fill="#f472b6"/><rect x="2" y="2" width="2" height="1" fill="#f472b6"/><rect x="4" y="2" width="2" height="1" fill="#f9a8d4"/><rect x="6" y="2" width="8" height="1" fill="#f472b6"/><rect x="1" y="3" width="2" height="1" fill="#f472b6"/><rect x="3" y="3" width="1" height="1" fill="#f9a8d4"/><rect x="4" y="3" width="11" height="1" fill="#f472b6"/><rect x="1" y="4" width="3" height="1" fill="#f472b6"/><rect x="4" y="4" width="2" height="1" fill="#ffffff"/><rect x="6" y="4" width="4" height="1" fill="#f472b6"/><rect x="10" y="4" width="2" height="1" fill="#ffffff"/><rect x="12" y="4" width="3" height="1" fill="#f472b6"/><rect x="1" y="5" width="3" height="1" fill="#f472b6"/><rect x="4" y="5" width="1" height="1" fill="#ffffff"/><rect x="5" y="5" width="1" height="1" fill="#1a1a2e"/><rect x="6" y="5" width="4" height="1" fill="#f472b6"/><rect x="10" y="5" width="1" height="1" fill="#ffffff"/><rect x="11" y="5" width="1" height="1" fill="#1a1a2e"/><rect x="12" y="5" width="3" height="1" fill="#f472b6"/><rect x="1" y="6" width="14" height="1" fill="#f472b6"/><rect x="2" y="7" width="12" height="1" fill="#f472b6"/><rect x="1" y="8" width="2" height="1" fill="#f472b6"/><rect x="4" y="8" width="2" height="1" fill="#f472b6"/><rect x="7" y="8" width="2" height="1" fill="#f472b6"/><rect x="10" y="8" width="2" height="1" fill="#f472b6"/><rect x="13" y="8" width="2" height="1" fill="#f472b6"/><rect x="0" y="9" width="2" height="1" fill="#f472b6"/><rect x="4" y="9" width="1" height="1" fill="#f472b6"/><rect x="7" y="9" width="2" height="1" fill="#f472b6"/><rect x="11" y="9" width="1" height="1" fill="#f472b6"/><rect x="14" y="9" width="2" height="1" fill="#f472b6"/><rect x="0" y="10" width="1" height="1" fill="#f472b6"/><rect x="3" y="10" width="2" height="1" fill="#f472b6"/><rect x="7" y="10" width="2" height="1" fill="#f472b6"/><rect x="11" y="10" width="2" height="1" fill="#f472b6"/><rect x="15" y="10" width="1" height="1" fill="#f472b6"/><rect x="1" y="11" width="2" height="1" fill="#f472b6"/><rect x="5" y="11" width="2" height="1" fill="#f472b6"/><rect x="9" y="11" width="2" height="1" fill="#f472b6"/><rect x="13" y="11" width="2" height="1" fill="#f472b6"/></symbol><symbol id="ch-art" viewBox="0 0 300 230"><g data-part="branch"><path class="ch-branch" d="M10 196 C90 188 200 192 292 184"/></g>
@@ -293,6 +294,23 @@
     <h2 id="h-ceph">Cephalo blocks before. SideEye is meant to watch after.</h2>
     <p>Cephalo checks each tool call against your rules and blocks the dangerous ones before they run. It is released. SideEye does not need it, and Cephalo does not need SideEye. Today the two share only a read-only view of Cephalo's log and the approval pop-up above.</p>
     <p class="limit"><strong>Limit:</strong> the pop-up needs a Cephalo change that is not shipped, so nothing connects them for most people yet.</p>
+    <h3 style="margin-top:28px">Block it, and the agent tries another way</h3>
+    <p>The same four calls run twice: with Cephalo only, and with Cephalo plus SideEye.</p>
+    <p class="sim">Simulation</p>
+    <div class="demo" id="split-demo" data-scenario="data/scenarios/split.json" data-rules="data/cephalo-rules-0.1.1.json">
+      <p class="sp-loading pg-loading">Loading the simulation…</p>
+      <p class="sp-error" hidden>The simulation data failed to load. Reload the page to try again.</p>
+      <noscript><p class="noscript-note">This simulation needs JavaScript.</p></noscript>
+      <div class="sp-stage" hidden>
+        <div class="sp-run"><button class="btn btn-primary sp-play" type="button" aria-pressed="false">Play</button><button class="btn sp-next" type="button" hidden>Next step</button><button class="btn sp-reset" type="button">Reset</button></div>
+        <div class="sp-cols">
+          <section class="sp-lane sp-left" aria-labelledby="sp-h-l"><h3 id="sp-h-l">With Cephalo only</h3><ol class="ev-log" aria-label="Events with Cephalo only"></ol><p class="sp-sum"></p></section>
+          <section class="sp-lane sp-right" aria-labelledby="sp-h-r"><h3 id="sp-h-r">With Cephalo + SideEye</h3><ol class="ev-log" aria-label="Events with Cephalo and SideEye"></ol><p class="sp-sum"></p></section>
+        </div>
+        <div class="sr-only" aria-live="polite" aria-atomic="true"><span class="sp-live"></span></div>
+      </div>
+    </div>
+    <p class="limit"><strong>Limit:</strong> the first call is blocked by a real rule. The variants are not matched by any of the 12 built-in rules. SideEye's side is simulated, and its containment stops what comes next, not the call it flagged.</p>
     <div class="btn-row"><a class="btn btn-primary" href="https://nomajorconcerns.github.io/">See how they work together →</a><a class="btn" href="https://nomajorconcerns.github.io/cephalo/">Cephalo site</a></div>
   </div>
 </section>

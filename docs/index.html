@@ -2,7 +2,7 @@
 <html lang="en" data-ns="se">
 <head>
 <title>SideEye: every agent gets the side-eye</title>
-<meta name="description" content="SideEye is agent detection and response for AI agents. In development: a desktop console on sample data. Baselines, flags and containment are planned.">
+<meta name="description" content="SideEye is agent detection and response for AI agents. In development: a desktop console on sample data. Try the simulation of what it is meant to do. Baselines, flags and containment are planned.">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://nomajorconcerns.github.io/sideeye/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="SideEye">
@@ -22,6 +22,9 @@
 
 <link rel="stylesheet" href="css/site.css">
 <script src="js/ui.js" defer></script>
+<script type="module" src="js/hero-feed.js"></script>
+<script type="module" src="js/playground.js"></script>
+<script type="module" src="js/baseline.js"></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="octo" viewBox="0 0 16 12" shape-rendering="crispEdges"><rect x="6" y="0" width="4" height="1" fill="#f472b6"/><rect x="3" y="1" width="10" height="1" fill="#f472b6"/><rect x="2" y="2" width="2" height="1" fill="#f472b6"/><rect x="4" y="2" width="2" height="1" fill="#f9a8d4"/><rect x="6" y="2" width="8" height="1" fill="#f472b6"/><rect x="1" y="3" width="2" height="1" fill="#f472b6"/><rect x="3" y="3" width="1" height="1" fill="#f9a8d4"/><rect x="4" y="3" width="11" height="1" fill="#f472b6"/><rect x="1" y="4" width="3" height="1" fill="#f472b6"/><rect x="4" y="4" width="2" height="1" fill="#ffffff"/><rect x="6" y="4" width="4" height="1" fill="#f472b6"/><rect x="10" y="4" width="2" height="1" fill="#ffffff"/><rect x="12" y="4" width="3" height="1" fill="#f472b6"/><rect x="1" y="5" width="3" height="1" fill="#f472b6"/><rect x="4" y="5" width="1" height="1" fill="#ffffff"/><rect x="5" y="5" width="1" height="1" fill="#1a1a2e"/><rect x="6" y="5" width="4" height="1" fill="#f472b6"/><rect x="10" y="5" width="1" height="1" fill="#ffffff"/><rect x="11" y="5" width="1" height="1" fill="#1a1a2e"/><rect x="12" y="5" width="3" height="1" fill="#f472b6"/><rect x="1" y="6" width="14" height="1" fill="#f472b6"/><rect x="2" y="7" width="12" height="1" fill="#f472b6"/><rect x="1" y="8" width="2" height="1" fill="#f472b6"/><rect x="4" y="8" width="2" height="1" fill="#f472b6"/><rect x="7" y="8" width="2" height="1" fill="#f472b6"/><rect x="10" y="8" width="2" height="1" fill="#f472b6"/><rect x="13" y="8" width="2" height="1" fill="#f472b6"/><rect x="0" y="9" width="2" height="1" fill="#f472b6"/><rect x="4" y="9" width="1" height="1" fill="#f472b6"/><rect x="7" y="9" width="2" height="1" fill="#f472b6"/><rect x="11" y="9" width="1" height="1" fill="#f472b6"/><rect x="14" y="9" width="2" height="1" fill="#f472b6"/><rect x="0" y="10" width="1" height="1" fill="#f472b6"/><rect x="3" y="10" width="2" height="1" fill="#f472b6"/><rect x="7" y="10" width="2" height="1" fill="#f472b6"/><rect x="11" y="10" width="2" height="1" fill="#f472b6"/><rect x="15" y="10" width="1" height="1" fill="#f472b6"/><rect x="1" y="11" width="2" height="1" fill="#f472b6"/><rect x="5" y="11" width="2" height="1" fill="#f472b6"/><rect x="9" y="11" width="2" height="1" fill="#f472b6"/><rect x="13" y="11" width="2" height="1" fill="#f472b6"/></symbol><symbol id="ch-art" viewBox="0 0 300 230"><g data-part="branch"><path class="ch-branch" d="M10 196 C90 188 200 192 292 184"/></g>
@@ -36,7 +39,9 @@
 <header class="topbar zone-nmc"><div class="wrap">
   <a class="brand" href="./"><svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="40" fill="#a8dd48"/><circle cx="50" cy="50" r="28" fill="none" stroke="#7aa22f" stroke-width="4"/><circle cx="50" cy="50" r="17" fill="none" stroke="#7aa22f" stroke-width="4"/><circle cx="31" cy="48" r="11" fill="#141a0a"/><circle cx="28" cy="45" r="3" fill="#fff"/></svg>
  SideEye</a>
-  <nav class="topnav" aria-label="Main"><a href="https://nomajorconcerns.github.io/">With Cephalo</a><a href="https://nomajorconcerns.github.io/cephalo/">Cephalo</a></nav>
+  <nav class="topnav" aria-label="Main">
+    <a href="#how">How it works</a><a href="#try">Try it</a><a href="#baseline">Baseline</a><a href="#data">Data</a><a href="#limits">Limits</a><a href="#install">Install</a><a href="https://nomajorconcerns.github.io/">With Cephalo</a>
+  </nav>
   <div class="controls" role="group" aria-label="Page settings">
   <button class="toggle" id="toggle-theme" type="button" aria-pressed="false">Theme</button>
   <button class="toggle" id="toggle-motion" type="button" aria-pressed="false">Motion</button>
@@ -45,6 +50,7 @@
 
 </div></header>
 <main id="main">
+
 <section class="zone-sideeye" aria-labelledby="h-hero" style="padding-top:clamp(32px,6vw,72px)">
   <div class="wrap hero">
     <div>
@@ -53,7 +59,7 @@
       <p class="lead">Knows what normal looks like. Notices when it isn't.</p>
       <p>SideEye is agent detection and response for AI agents. The goal is to learn what is normal for each agent on your computer, flag what is not, and contain the agent. It is meant to sit beside Cephalo, which blocks dangerous tool calls before they run, but neither requires the other.</p>
       <p class="status" style="background:var(--z-surface)"><strong>What exists today.</strong> A desktop console (Windows build tested) running on sample data, and a read-only live view of Cephalo's audit log. Per-agent baselines, anomaly flags and containment are <strong>Planned</strong>, not built. Nothing is downloadable yet.</p>
-      <div class="btn-row"><a class="btn btn-primary" href="https://github.com/nomajorconcerns/sideeye">Watch on GitHub</a><a class="btn" href="https://nomajorconcerns.github.io/">See how it fits with Cephalo</a></div>
+      <div class="btn-row"><a class="btn btn-primary" href="#try">Make an agent misbehave ↓</a><a class="btn" href="https://github.com/nomajorconcerns/sideeye">Watch on GitHub</a></div>
     </div>
     <div class="hero-art">
       <svg class="ch mascot" id="chameleon" data-state="normal" viewBox="0 0 300 230" role="img" aria-label="SideEye chameleon on a branch, looking sideways. State: Normal"><g id="branch" data-part="branch"><path class="ch-branch" d="M10 196 C90 188 200 192 292 184"/></g>
@@ -64,16 +70,229 @@
 <g id="head" data-part="head"><path class="ch-body" d="M178 120 C186 96 214 84 240 96 C262 106 270 128 258 142 C244 156 210 156 192 146 C184 140 180 132 178 120 Z"/><path class="ch-hood" d="M184 112 C188 86 206 70 226 66 C230 74 236 84 240 96"/><path class="ch-mouth" d="M244 140 L256 137"/></g>
 <g id="crest" data-part="crest" class="ch-crest"><g class="ch-feathers"><path d="M122 24 Q93.6 11.1 58 22 Q92.8 35.1 122 24 Z"/><path d="M140 31 Q105.3 21.1 68 42 Q109.9 50.8 140 31 Z"/><path d="M160 40 Q121.4 34.5 84 62 Q130.2 65.3 160 40 Z"/><path d="M178 50 Q138.0 48.8 104 82 Q151.4 80.0 178 50 Z"/><path d="M194 62 Q155.8 64.4 128 100 Q172.8 93.8 194 62 Z"/><path d="M206 76 Q174.2 79.2 156 112 Q192.8 105.2 206 76 Z"/><path class="ch-feather-top" d="M216 90 C198 52 160 26 112 18 C120 32 150 48 176 64 C194 74 206 84 210 94 Z"/></g></g>
 <g id="eye" data-part="eye"><circle class="ch-eye-ring" cx="230" cy="114" r="16"/><circle class="ch-eye-ring2" cx="230" cy="114" r="10"/><g id="pupil" data-part="pupil" class="ch-pupil"><circle class="ch-pupil-dot" cx="230" cy="113" r="5"/><circle class="ch-pupil-hi" cx="228.6" cy="111.6" r="1.4"/></g><path class="ch-lid" d="M214 114 A16 16 0 0 1 246 114 Z"/></g></svg>
-      <p class="state-label" style="justify-content:center;margin-top:10px"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Normal</p>
+      <p class="state-label" style="justify-content:center;margin-top:10px"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Normal</p>
       <p class="voice" style="text-align:center" data-deco>Hm.</p>
+      <div class="feed-box" id="hero-feed" data-scenario="data/scenarios/weird.json">
+        <div class="top"><span class="sim" style="margin:0">Simulation</span><span><button class="toggle hf-pause" type="button" aria-pressed="false">Pause</button><button class="toggle hf-next" type="button" hidden>Next step</button></span></div>
+        <p class="small muted" style="margin:6px 0 4px">claude-code, scripted events</p>
+        <ul class="feed" aria-label="Scripted events for claude-code">
+          <li><span class="mono t">14:12:31</span><span class="what">read src/app/session.ts</span></li>
+          <li><span class="mono t">14:12:36</span><span class="what">ran npm test</span></li>
+          <li><span class="mono t">14:12:41</span><span class="what">edited src/app/session.ts</span></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
+
+<section id="how" class="zone-sideeye" aria-labelledby="h-how" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2 id="h-how">Watch, learn, flag, contain.</h2>
+    <p class="lead">Four steps. The status under each says how much of it exists. The example events are scripted.</p>
+    <ol class="how">
+      <li>
+        <svg class="ch mascot" data-state="normal" viewBox="0 0 300 230" role="img" aria-label="Chameleon, state: Normal"><use href="#ch-art"/></svg>
+        <h3>Watch</h3>
+        <p class="state-label"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Normal</p>
+        <p>See what each agent asks to do.</p>
+        <p class="ev">14:01:52 codex read lib/parser.py</p>
+        <p><span class="tag tag-built">Built, partly</span></p>
+        <p class="limit"><strong>Limit:</strong> today it reads Cephalo's log only, so it sees what Cephalo logs and nothing else.</p>
+      </li>
+      <li>
+        <svg class="ch mascot" data-state="learning" viewBox="0 0 300 230" role="img" aria-label="Chameleon, state: Learning"><use href="#ch-art"/></svg>
+        <h3>Learn</h3>
+        <p class="state-label"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2.4"/></svg> Learning</p>
+        <p>Build a baseline of what is normal for each agent.</p>
+        <p class="ev">codex: 188 events seen, 0 credential reads</p>
+        <p><span class="tag tag-planned">Planned</span></p>
+        <p class="limit"><strong>Limit:</strong> a baseline needs days of history before it means anything.</p>
+      </li>
+      <li>
+        <svg class="ch mascot" data-state="flagged" viewBox="0 0 300 230" role="img" aria-label="Chameleon, state: Flagged"><use href="#ch-art"/></svg>
+        <h3>Flag</h3>
+        <p class="state-label"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2 15 14H1Z" fill="currentColor"/></svg> Flagged</p>
+        <p>Say what was unusual, in plain words.</p>
+        <p class="ev">codex has never read credential files in 188 events.</p>
+        <p><span class="tag tag-planned">Planned</span></p>
+        <p class="limit"><strong>Limit:</strong> genuinely new work looks unusual too. Expect false positives.</p>
+      </li>
+      <li>
+        <svg class="ch mascot" data-state="contained" viewBox="0 0 300 230" role="img" aria-label="Chameleon, state: Contained"><use href="#ch-art"/></svg>
+        <h3>Contain</h3>
+        <p class="state-label"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3" width="3" height="10" rx="1" fill="currentColor"/><rect x="9.5" y="3" width="3" height="10" rx="1" fill="currentColor"/></svg> Contained</p>
+        <p>Pause the agent until a person decides.</p>
+        <p class="ev">codex paused</p>
+        <p><span class="tag tag-planned">Planned</span></p>
+        <p class="limit"><strong>Limit:</strong> the console has a Contain dialog, but it records your choice and enforces nothing yet.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="try" class="zone-sideeye" aria-labelledby="h-try" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">Try it</p>
+    <h2 id="h-try">Make it weird.</h2>
+    <p class="lead">Three agents stream normal work. Pick one, make it do something unusual, and watch the deviation score and the reason.</p>
+    <p class="sim">Simulation</p>
+    <p class="fineprint" style="margin-top:0">Scripted, seeded data in your browser, the same for every visitor. Nothing here is live, and the scoring is illustrative: SideEye does not detect this today.</p>
+    <div class="demo" id="playground" data-scenario="data/scenarios/weird.json">
+      <p class="pg-loading">Loading the simulation…</p>
+      <p class="pg-error" hidden>The simulation data failed to load. Reload the page to try again.</p>
+      <noscript><p class="noscript-note">This simulation needs JavaScript. The four steps above describe the same flow.</p></noscript>
+      <div class="pg-stage" hidden>
+        <div class="pg-grid">
+          <div class="pg-side">
+            <svg class="ch mascot pg-mascot" data-state="normal" viewBox="0 0 300 230" role="img" aria-label="SideEye chameleon. State: Normal."><use href="#ch-art"/></svg>
+            <p class="pg-state" data-state="normal"></p>
+            <p class="pg-voice" data-deco></p>
+          </div>
+          <div>
+            <div class="pg-controls">
+              <fieldset><legend>Inject into</legend><div class="pg-agents"></div></fieldset>
+              <fieldset><legend>Make it do this</legend><div class="pg-buttons"></div></fieldset>
+              <div class="pg-run">
+                <button class="btn pg-pause" type="button" aria-pressed="false">Pause feed</button>
+                <button class="btn pg-next" type="button" hidden>Next step</button>
+                <button class="btn pg-reset" type="button">Reset</button>
+              </div>
+              <p class="pg-status">Pick an agent and a button.</p>
+            </div>
+            <div class="pg-lanes"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="limit"><strong>Limit:</strong> this shows the idea, not the product. Try <span class="mono">hermes</span> with "Write outside the project folder": it does that often, so it is not flagged. That is what a per-agent baseline is for.</p>
+  </div>
+</section>
+
+<section id="baseline" class="zone-sideeye" aria-labelledby="h-bl" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">Baseline timeline</p>
+    <h2 id="h-bl">Normal takes time to learn.</h2>
+    <p class="lead">Drag the slider. With few days of history, SideEye has nothing to compare against. With more, the same event stands out.</p>
+    <p class="sim">Simulation</p>
+    <div class="demo" id="baseline-demo" data-scenario="data/scenarios/baseline.json">
+      <p class="bl-loading">Loading the simulation…</p>
+      <p class="bl-error" hidden>The simulation data failed to load. Reload the page to try again.</p>
+      <noscript><p class="noscript-note">This simulation needs JavaScript.</p></noscript>
+      <div class="bl-stage" hidden>
+        <div class="bl-grid2">
+          <div>
+            <div class="bl-head"><span class="bl-state"></span><span class="bl-day small muted"></span></div>
+            <svg class="bl-chart" viewBox="0 0 640 260" role="img" aria-label="Baseline chart"></svg>
+            <div class="bl-controls">
+              <label for="bl-days"><strong>Days observed: <output id="bl-days-out">0</output></strong></label>
+              <input id="bl-days" type="range" min="0" max="29" step="1" value="0">
+              <fieldset class="pg-controls" style="border:0;padding:0;margin:0"><legend>Event today</legend>
+                <div class="bl-events">
+                  <label class="radio"><input type="radio" name="bl-event" value="send" checked><span>Unusual send</span></label>
+                  <label class="radio"><input type="radio" name="bl-event" value="refactor"><span>Legitimate big refactor</span></label>
+                </div>
+              </fieldset>
+            </div>
+            <p class="bl-verdict" style="min-height:4.5em"></p>
+            <div class="sr-only" aria-live="polite"><span class="bl-live"></span></div>
+          </div>
+          <div class="pg-side">
+            <svg class="ch mascot bl-mascot" data-state="learning" viewBox="0 0 300 230" role="img" aria-label="SideEye chameleon. State: Learning."><use href="#ch-art"/></svg>
+            <p class="small muted" style="margin-top:12px">Shaded band: what the agent has shown it normally does. Line: its daily volume.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="limit"><strong>Limit:</strong> the second event is the same send, but it was legitimate. A baseline can't tell new work from new danger, so that one is a false positive by design. Warm-up here is 7 days; the real period is not decided.</p>
+  </div>
+</section>
+
+<section id="data" class="zone-sideeye" aria-labelledby="h-data" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">What SideEye sees, stores and sends</p>
+    <h2 id="h-data">Nothing leaves the machine.</h2>
+    <p class="lead">This table is taken from the app's source and configuration, as built today. It describes the console and the Cephalo hand-off, not the Planned detection.</p>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Data table, scrolls sideways on small screens">
+    <table class="tbl">
+      <thead><tr><th scope="col">What</th><th scope="col">Where it is kept</th><th scope="col">How long</th><th scope="col">Leaves the machine?</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Cephalo's audit log, read only</th><td>Read from <code>~/.cephalo/audit.jsonl</code> (the last 4 MB) and the <code>asks/</code> folder. SideEye never writes there.</td><td>Held in memory while the window is open. Re-read every 5 s. Not copied to disk by SideEye.</td><td>No</td></tr>
+        <tr><th scope="row">What the console shows from it</th><td>Counts for the last 24 hours and the 10 newest actions. Each command is cut to one 120-character line. Parameters are not shown.</td><td>Memory only</td><td>No</td></tr>
+        <tr><th scope="row">Mode: Audit or Enforce</th><td><code>~/.sideeye/settings.json</code></td><td>Until you change it</td><td>No</td></tr>
+        <tr><th scope="row">Approval hand-off to Cephalo</th><td><code>~/.sideeye/bridge.json</code>: a port on <code>127.0.0.1</code> and a random token. Written only in Enforce mode.</td><td>Removed on exit, and when you switch to Audit</td><td>No. It listens on the loopback address only.</td></tr>
+        <tr><th scope="row">Your settings and decisions in the console</th><td>The app's own WebView local storage</td><td>Settings stay. Decisions last for one run of the app; a fresh launch starts clean.</td><td>No</td></tr>
+        <tr><th scope="row">Start at login</th><td>One startup entry, only if you turn it on (Windows: <code>HKCU\...\Run\SideEye</code>)</td><td>Until you turn it off</td><td>No</td></tr>
+        <tr><th scope="row">Prompts, file contents, screen</th><td>Not collected. The app contains no code that reads them.</td><td>Not applicable</td><td>Not applicable</td></tr>
+        <tr><th scope="row">Fleet, alerts and baselines in the console</th><td>Sample data bundled in the app</td><td>Not applicable</td><td>Not applicable</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Network, telemetry, updates</h3>
+    <ul>
+      <li>The app has no HTTP client among its Rust dependencies and no <code>fetch</code> call in its interface code.</li>
+      <li>Its content-security policy allows connections only to itself.</li>
+      <li>There is no telemetry and no updater. The only socket it opens is the loopback one above, and only in Enforce mode.</li>
+    </ul>
+    <h3>How to verify it yourself</h3>
+    <p><span class="tag tag-planned">Planned</span> The app's source is not published yet, so today you can't read the code or run these checks. They are what to run once it is.</p>
+    <div class="code" tabindex="0" role="group" aria-label="Commands to verify"><pre>grep -n "reqwest\|hyper\|ureq\|curl" src-tauri/Cargo.toml
+grep -n "connect-src" src-tauri/tauri.conf.json
+netstat -ano | findstr LISTENING</pre><button class="copy" type="button">Copy</button></div>
+    <p class="limit"><strong>Limit:</strong> until the source is public, this page is a claim, not something you can check. The first command should print nothing, the second should show <code>'self'</code> and the IPC addresses only, and any listener the third shows for SideEye should be on <code>127.0.0.1</code>.</p>
+  </div>
+</section>
+
+<section id="limits" class="zone-sideeye" aria-labelledby="h-limits" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap">
+    <p class="eyebrow">Honest limits</p>
+    <h2 id="h-limits">What SideEye does, and what it does not.</h2>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Limits table, scrolls sideways on small screens">
+    <table class="tbl">
+      <thead><tr><th scope="col">Area</th><th scope="col">SideEye does</th><th scope="col">SideEye does not</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Today</th><td><span class="tag tag-built">Built</span> Shows a console on sample data, and a live read-only view of Cephalo's audit log.</td><td>Detect anything on its own. Every alert and agent in the console is sample data.</td></tr>
+        <tr><th scope="row">What it can see</th><td><span class="tag tag-built">Built</span> Reads what Cephalo logs for Claude Code and Hermes.</td><td>See an agent Cephalo does not hook, or anything Cephalo does not log.</td></tr>
+        <tr><th scope="row">Warm-up</th><td><span class="tag tag-planned">Planned</span> Learn what is normal for each agent from its history.</td><td>Say anything useful in the first days. A new baseline is wide, and a flag from it means little.</td></tr>
+        <tr><th scope="row">False positives</th><td><span class="tag tag-planned">Planned</span> Flag behaviour that is unusual for that agent, with a plain-English reason.</td><td>Tell new work from new danger. A legitimate one-off job will be flagged too. You mark those as expected.</td></tr>
+        <tr><th scope="row">Detection, not prevention</th><td><span class="tag tag-planned">Planned</span> Notice after an action, and contain the agent.</td><td>Stop the first bad action. Blocking before a call runs is Cephalo's job, and it only blocks what its rules match.</td></tr>
+        <tr><th scope="row">Same-user tamper</th><td>Runs as you, like the agents.</td><td>Protect itself from something running as the same user. That includes the agent: it could stop SideEye or edit its files. Tamper protection is <span class="tag tag-planned">Planned</span>. Real isolation needs another OS user or a container.</td></tr>
+        <tr><th scope="row">Approving Cephalo's holds</th><td><span class="tag tag-built">Built</span> In Enforce mode, shows a pop-up for an action Cephalo would ask about (Claude Code only). Allow once, or Block. No answer in 40 s means block.</td><td>Work yet for most people. It needs a change to Cephalo that has not shipped, and no "Always allow" exists for real holds.</td></tr>
+        <tr><th scope="row">Scope</th><td>Runs as an ordinary app on your machine.</td><td>Act as a sandbox, run kernel code, read prompts or capture the screen.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="install" class="zone-sideeye" aria-labelledby="h-install" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap" style="max-width:860px">
+    <p class="eyebrow">Install</p>
+    <h2 id="h-install">Not installable yet.</h2>
+    <p>There is no download, no package and no install command. A Windows installer exists, built locally and unsigned, and it is not published.</p>
+    <ul class="facts">
+      <li><span class="tag tag-planned">Planned</span> Signed Windows <code>.msi</code>, macOS <code>.dmg</code>, and Linux <code>.deb</code>, <code>.rpm</code> and AppImage.</li>
+      <li><span class="tag tag-planned">Planned</span> Signed, staged updates with rollback.</li>
+      <li><span class="tag tag-planned">Planned</span> Start at login stays off by default.</li>
+    </ul>
+    <div class="btn-row"><a class="btn btn-primary" href="https://github.com/nomajorconcerns/sideeye">Watch on GitHub</a></div>
+    <p class="limit"><strong>Limit:</strong> macOS and Linux builds have not been made or tested. Only Windows has been built and run.</p>
+  </div>
+</section>
+
+<section id="cephalo" class="zone-cephalo" aria-labelledby="h-ceph" style="border-top:1px solid var(--nmc-line)">
+  <div class="wrap" style="max-width:860px">
+    <p class="eyebrow">With Cephalo</p>
+    <h2 id="h-ceph">Cephalo blocks before. SideEye is meant to watch after.</h2>
+    <p>Cephalo checks each tool call against your rules and blocks the dangerous ones before they run. It is released. SideEye does not need it, and Cephalo does not need SideEye. Today the two share only a read-only view of Cephalo's log and the approval pop-up above.</p>
+    <p class="limit"><strong>Limit:</strong> the pop-up needs a Cephalo change that is not shipped, so nothing connects them for most people yet.</p>
+    <div class="btn-row"><a class="btn btn-primary" href="https://nomajorconcerns.github.io/">See how they work together →</a><a class="btn" href="https://nomajorconcerns.github.io/cephalo/">Cephalo site</a></div>
+  </div>
+</section>
+
 </main>
 <footer class="zone-nmc"><div class="wrap">
   <p><span data-deco>No major concerns. Until there are.</span></p>
   <p>I built Cephalo to block what I could predict. SideEye is for what I couldn't.</p>
-  <p><a href="https://nomajorconcerns.github.io/">No Major Concerns</a> &middot; <a href="https://nomajorconcerns.github.io/cephalo/">Cephalo</a> &middot; <a href="https://github.com/nomajorconcerns/sideeye">GitHub</a> &middot; <a href="https://github.com/nomajorconcerns/sideeye/issues">Issues</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="agents.md">agents.md</a></p>
+  <p><a href="https://nomajorconcerns.github.io/">No Major Concerns</a> &middot; <a href="https://nomajorconcerns.github.io/cephalo/">Cephalo</a> &middot; <a href="https://github.com/nomajorconcerns/sideeye">GitHub</a> &middot; <a href="https://github.com/nomajorconcerns/sideeye/issues">Issues</a> &middot; <a href="https://github.com/nomajorconcerns/sideeye/blob/main/SECURITY.md">Security policy</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="agents.md">agents.md</a></p>
   <p>No cookies, no analytics, no third-party requests.</p>
 </div></footer>
 </body></html>

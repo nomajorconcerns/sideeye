@@ -182,6 +182,52 @@ footer li{padding:3px 0}
 .stats{display:grid;gap:16px}@media(min-width:900px){.stats{grid-template-columns:1fr 1fr}}.stats>*{min-width:0}
 .stat{max-width:none;color:var(--nmc-ink)}
 .stat{background:var(--z-surface);border-color:var(--z-line);color:var(--z-ink)}.stat .big-num{color:var(--z-ink)}.stat cite,.stat .muted{color:var(--z-muted)}
+
+/* Smooth entrance and active link */
+.js-reveal .rv{opacity:0;transform:translateY(14px);transition:opacity 480ms cubic-bezier(.2,.7,.2,1),transform 480ms cubic-bezier(.2,.7,.2,1)}
+.js-reveal .rv.in{opacity:1;transform:none}
+.topnav a{transition:color 200ms,border-color 200ms;border-bottom:2px solid transparent}
+.topnav a[aria-current]{color:var(--nmc-ink);border-bottom-color:var(--nmc-ink)}
+.btn,.toggle,.copy,[role=tab],.radio,details.faq,.card{transition:background-color 200ms,border-color 200ms,color 200ms,filter 200ms}
+.btn:active{transform:translateY(1px)}
+details.faq .ans{animation:faq-in 260ms ease-out}
+@keyframes faq-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+/* Living chameleon: blink, drifting pupil, tail sway, crest ruffle, breathing. Class-only selectors so they reach <use> copies. */
+.ch-lid{animation:ch-blink 6.5s infinite}
+@keyframes ch-blink{0%,93%,100%{opacity:var(--lid)}95.5%{opacity:1}}
+.ch-pupil-dot,.ch-pupil-hi{animation:ch-drift 9s ease-in-out infinite}
+@keyframes ch-drift{0%,100%{transform:translate(0,0)}30%{transform:translate(-1.6px,.4px)}60%{transform:translate(1.2px,-.5px)}}
+.ch-tail{transform-box:view-box;transform-origin:72px 160px;animation:ch-sway 5s ease-in-out infinite}
+@keyframes ch-sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(3deg)}}
+.ch-feathers{transform-box:view-box;transform-origin:200px 120px;animation:ch-ruffle 7s ease-in-out infinite}
+@keyframes ch-ruffle{0%,100%{transform:rotate(0)}45%{transform:rotate(1.6deg)}55%{transform:rotate(-1.2deg)}}
+.ch-body,.ch-ridge,.ch-stripe,.ch-belly{transform-box:view-box;transform-origin:135px 175px;animation:ch-breathe 4.2s ease-in-out infinite}
+@keyframes ch-breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.018)}}
+.ch[data-state=flagged] .ch-feathers{animation-duration:1.8s}
+/* Indicator legend */
+.legend{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));list-style:none;padding:0;margin:1.2em 0}
+.legend>li{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;background:var(--z-surface);border:1px solid var(--z-line);border-radius:12px;padding:14px;color:var(--z-ink);min-width:0}
+.legend svg{width:44px;height:44px;grid-row:span 3}
+.legend strong{font-size:1rem}
+.legend span.d{color:var(--z-muted);font-size:.92rem}
+.legend .tile{display:grid;place-items:center;width:56px;height:56px;border-radius:12px;background:#0b0f14;grid-row:span 3}
+.legend .tile svg{width:40px;height:40px}
+.pill{white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font:600 .8rem/1 var(--font-body);padding:6px 10px;border-radius:999px;background:#0b0f14;color:#e6ebf2;border:1px solid #5a6982}
+.pill svg{width:12px;height:12px}
+/* Guide */
+.guide{display:grid;gap:22px;margin:1.4em 0}
+.fn{display:grid;gap:18px;align-items:start;background:var(--z-surface);border:1px solid var(--z-line);border-radius:14px;padding:clamp(16px,3vw,24px);color:var(--z-ink)}
+@media(min-width:960px){.fn{grid-template-columns:1fr 1.15fr}.fn:nth-child(even){grid-template-columns:1.15fr 1fr}.fn:nth-child(even) .fn-shot{order:-1}}
+.fn>*{min-width:0}
+.fn h3{margin-bottom:.3em}
+.fn ol{padding-left:1.2em}.fn li{margin-bottom:.35em}
+.fn-shot{border:1px solid var(--z-line);border-radius:10px;overflow:hidden;background:var(--z-bg)}
+.fn-shot img{display:block;width:100%;height:auto}
+.fn-shot figcaption{font-size:.82rem;color:var(--z-muted);padding:6px 10px;border-top:1px solid var(--z-line)}
+.fn-shot img.shot-light{display:none}
+:root[data-theme=light] .fn-shot img.shot-dark{display:none}:root[data-theme=light] .fn-shot img.shot-light{display:block}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]) .fn-shot img.shot-dark{display:none}:root:not([data-theme=dark]) .fn-shot img.shot-light{display:block}}
+.note{font-size:.9rem;color:var(--z-muted);border-left:3px solid var(--z-line);padding-left:10px;margin:.6em 0}
 /* Demo components shared by both sites: simulation label, lanes, feeds, meter, baseline chart */
 .sim{display:inline-flex;align-items:center;gap:6px;font:600 .72rem/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--z-muted);border:1px dashed var(--z-line);border-radius:999px;padding:6px 10px;margin:0 0 14px}
 .demo{background:var(--z-surface);border:1px solid var(--z-line);border-radius:14px;padding:clamp(14px,3vw,24px);color:var(--z-ink)}

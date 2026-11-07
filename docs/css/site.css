@@ -222,7 +222,8 @@ details.faq .ans{animation:faq-in 260ms ease-out}
 .fn h3{margin-bottom:.3em}
 .fn ol{padding-left:1.2em}.fn li{margin-bottom:.35em}
 .fn-shot{border:1px solid var(--z-line);border-radius:10px;overflow:hidden;background:var(--z-bg)}
-.fn-shot img{display:block;width:100%;height:auto}
+.fn-shot img{display:block;width:100%;height:auto;max-width:640px;margin:0 auto}
+.fn-shot img[width="1200"]{max-width:none}
 .fn-shot figcaption{font-size:.82rem;color:var(--z-muted);padding:6px 10px;border-top:1px solid var(--z-line)}
 .fn-shot img.shot-light{display:none}
 :root[data-theme=light] .fn-shot img.shot-dark{display:none}:root[data-theme=light] .fn-shot img.shot-light{display:block}

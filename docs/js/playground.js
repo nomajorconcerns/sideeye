@@ -127,7 +127,7 @@ async function init(root) {
   function containLane(n) {
     const L = lanes[n];
     L.state = "contained"; L.contain.hidden = true;
-    addRow(L, { kind: "contained", tag: "CONTAINED", text: `${n} paused`, why: "Simulation: in the real product this is Planned, not built." });
+    addRow(L, { kind: "contained", tag: "CONTAINED", text: `${n} paused`, why: "Simulation. The real app holds or blocks the agent's next actions through Cephalo; this demo does not." });
     paintState();
     live.textContent = `CONTAINED: ${n} is paused.`;
     setStatus(`${n} is paused. Its lane has stopped.`);

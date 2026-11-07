@@ -9,7 +9,7 @@ if (box) (async () => {
     t += between(rng, ...S.tickSeconds);
     const li = document.createElement("li"); li.innerHTML = '<span class="mono t"></span><span class="what"></span>';
     li.children[0].textContent = clock(t); li.children[1].textContent = pickWeighted(rng, a.normal).text;
-    list.append(li); while (list.children.length > 4) list.firstChild.remove();
+    list.append(li); document.dispatchEvent(new CustomEvent("se:event")); while (list.children.length > 4) list.firstChild.remove();
   };
   const run = () => { clearTimeout(timer); timer = null; if (paused || reducedMotion() || !visible) return; timer = setTimeout(() => { add(); run(); }, between(rng, 1600, 2400)); };
   const sync = () => { const rm = reducedMotion(); pause.hidden = rm; next.hidden = !rm; pause.textContent = paused ? "Resume" : "Pause"; pause.setAttribute("aria-pressed", String(paused)); rm ? (clearTimeout(timer), timer = null) : run(); };

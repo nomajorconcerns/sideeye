@@ -137,7 +137,7 @@
         <p>Build a baseline of what is normal for each agent.</p>
         <p class="ev">codex: 188 events seen, 0 credential reads</p>
         <p><span class="tag tag-built">Built</span></p>
-        <p class="limit"><strong>Limit:</strong> a baseline needs days of history before it means anything. An agent is shown as Learning (day N of 7) until it has 7 days and 200 actions, and detections that need a baseline stay silent until then.</p>
+        <p class="limit"><strong>Limit:</strong> a baseline of a few actions is thin evidence. An agent shows as Learning (N of 3 actions) until SideEye has seen 3 of its actions. After that, first-use checks work at once, and each alert says how thin its baseline is. Volume and hour-of-day checks wait for 7 days and 200 actions.</p>
       </li>
       <li>
         <svg class="ch mascot" data-state="flagged" viewBox="0 0 300 230" role="img" aria-label="Chameleon, state: Flagged"><use href="#ch-art"/></svg>
@@ -304,7 +304,7 @@
         </div>
       </div>
     </div>
-    <p class="limit"><strong>Limit:</strong> the second event is the same send, but it was legitimate. A baseline can't tell new work from new danger, so that one is a false positive by design. Warm-up here is 7 days; the real period is not decided.</p>
+    <p class="limit"><strong>Limit:</strong> the second event is the same send, but it was legitimate. A baseline can't tell new work from new danger, so that one is a false positive by design. This demo is a volume check, which needs 7 days and 200 actions in the real app. First-use checks (a command the agent has never run) start after 3 actions.</p>
   </div>
 </section>
 
@@ -399,7 +399,7 @@ netstat -ano | findstr LISTENING</pre><button class="copy" type="button">Copy</b
       <tbody>
         <tr><th scope="row">Today</th><td><span class="tag tag-built">Built</span> Reads Cephalo's audit log, builds a baseline per agent, and raises alerts from twelve detections. Shows sample data, labelled, when there is no log.</td><td>See beyond what Cephalo logs. Owners, teams and a blast radius are not known, so they are not shown.</td></tr>
         <tr><th scope="row">What it can see</th><td><span class="tag tag-built">Built</span> Reads what Cephalo logs for Claude Code and Hermes.</td><td>See an agent Cephalo does not hook, or anything Cephalo does not log.</td></tr>
-        <tr><th scope="row">Warm-up</th><td><span class="tag tag-built">Built</span> Learns what is normal for each agent from its log: Learning for the first 7 days and 200 actions.</td><td>Say anything useful in the first days. A new baseline is wide, and a flag from it means little.</td></tr>
+        <tr><th scope="row">Warm-up</th><td><span class="tag tag-built">Built</span> Learns what is normal for each agent from its log: Learning for its first 3 actions. Volume and hour-of-day checks start after 7 days and 200 actions.</td><td>Be sure of anything early. A baseline of a few actions is thin, so expect more false positives at first.</td></tr>
         <tr><th scope="row">False positives</th><td><span class="tag tag-built">Built</span> Flags behaviour that is unusual for that agent, with a plain-English reason and a comparison with normal.</td><td>Tell new work from new danger. A legitimate one-off job will be flagged too. You mark those as expected.</td></tr>
         <tr><th scope="row">Detection, not prevention</th><td><span class="tag tag-built">Built</span> Notices after an action, and can hold or quarantine the agent's next actions.</td><td>Stop the first bad action. Blocking before a call runs is Cephalo's job, and it only blocks what its rules match.</td></tr>
         <tr><th scope="row">Same-user tamper</th><td>Runs as you, like the agents.</td><td>Protect itself from something running as the same user. That includes the agent: it could stop SideEye or edit its files. Tamper protection is <span class="tag tag-planned">Planned</span>. Real isolation needs another OS user or a container.</td></tr>
@@ -437,7 +437,7 @@ netstat -ano | findstr LISTENING</pre><button class="copy" type="button">Copy</b
       <div class="card"><h3>Built</h3><ul>
         <li>Desktop console (Windows build, tested) on Cephalo's log, with sample data when there is none.</li>
         <li>Tray icon and always-on-top pop-ups, with the window closed.</li>
-        <li>Per-agent baselines, with a 7-day Learning period.</li>
+        <li>Per-agent baselines that start judging after 3 actions.</li>
         <li>Twelve detections and alerts with evidence, a comparison with normal, and Mark as expected.</li>
         <li>Contain (hold each action), Quarantine and Kill, through a Cephalo change that has not been released.</li>
         <li>Suggested Cephalo rules, replayed against the log, written to a file you apply yourself.</li>

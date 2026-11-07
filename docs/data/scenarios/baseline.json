@@ -1,0 +1,15 @@
+{
+  "seed": 4412,
+  "days": 30,
+  "learningDays": 7,
+  "unit": "KB sent out per hour",
+  "mean": 38,
+  "sd": 9,
+  "priorBand": [0, 400],
+  "bandSigmas": 3,
+  "yMax": 420,
+  "events": {
+    "send": { "label": "Sends 180 KB to a host it has not used before", "value": 180, "note": "unusual for this agent" },
+    "refactor": { "label": "Sends 180 KB during a legitimate, one-off large refactor", "value": 180, "note": "genuinely new work, but it looks the same to a baseline" }
+  }
+}

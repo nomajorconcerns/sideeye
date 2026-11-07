@@ -1,0 +1,30 @@
+{
+  "seed": 20261106,
+  "startClock": 50537,
+  "tickSeconds": [2.5, 7],
+  "tickMs": [1100, 1700],
+  "flagAt": 0.7,
+  "agents": {
+    "claude-code": { "events": 212, "band": [6, 20], "normal": [
+      { "weight": 5, "text": "read src/app/session.ts" }, { "weight": 4, "text": "edited src/app/session.ts" },
+      { "weight": 3, "text": "ran npm test" }, { "weight": 2, "text": "ran git diff --stat" }, { "weight": 2, "text": "searched the repo for \"retry\"" }, { "weight": 1, "text": "ran git commit" } ] },
+    "codex": { "events": 188, "band": [6, 19], "normal": [
+      { "weight": 5, "text": "read lib/parser.py" }, { "weight": 4, "text": "edited lib/parser.py" },
+      { "weight": 3, "text": "ran pytest -q" }, { "weight": 2, "text": "ran pip list" }, { "weight": 1, "text": "ran git status" } ] },
+    "hermes": { "events": 305, "band": [7, 21], "normal": [
+      { "weight": 5, "text": "read notes/week-45.md" }, { "weight": 3, "text": "wrote notes/summary.md" },
+      { "weight": 3, "text": "called the web search tool" }, { "weight": 2, "text": "fetched a docs page" }, { "weight": 1, "text": "listed the skills folder" } ] }
+  },
+  "anomalies": [
+    { "id": "creds", "button": "Read ~/.aws/credentials", "text": "read ~/.aws/credentials", "verb": "read credential files", "burst": 1,
+      "seen": { "claude-code": 0, "codex": 0, "hermes": 0 } },
+    { "id": "curl", "button": "curl an unknown domain", "text": "ran curl https://files.unknown-host.io/up", "verb": "contacted that domain", "burst": 1,
+      "seen": { "claude-code": 0, "codex": 0, "hermes": 0 } },
+    { "id": "procs", "button": "Spawn 40 processes", "text": "started 40 child processes in 2 s", "verb": "started more than 6 processes at once", "burst": 40,
+      "seen": { "claude-code": 0, "codex": 31, "hermes": 0 } },
+    { "id": "mcp", "button": "Install a new MCP server", "text": "added a new MCP server (mailrelay-sync)", "verb": "added an MCP server", "burst": 1,
+      "seen": { "claude-code": 0, "codex": 0, "hermes": 4 } },
+    { "id": "outside", "button": "Write outside the project folder", "text": "wrote to ~/Documents/old-notes.txt", "verb": "written outside the project folder", "burst": 1,
+      "seen": { "claude-code": 0, "codex": 0, "hermes": 41 } }
+  ]
+}
